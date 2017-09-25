@@ -1,5 +1,6 @@
 ( function( wp, $, _ ) {
 	var GIPHY_URL = 'https://api.giphy.com/v1/gifs/search?api_key=Fswo3IBHt0TViFMN6zYgbYzSEb3sLx7I&limit=10&offset=0&rating=G&lang=en&q=';
+	var __ = wp.i18n.__;
 
 	// For later use.
 	var fetchGifs = _.debounce( function fetchGifs( search ) {
@@ -63,7 +64,13 @@
 	}, wp.element.createElement( 'ul', { key: 'results' }, results ) );
 
 
-	// Create your block here.
+	wp.blocks.registerBlockType( 'giphy/giphy', {
+		title: __( 'Giphy', 'giphy-block' ),
+		category: 'embed',
+		save: function save() {
+			return null;
+		},
+	} );
 
 
 } )( window.wp, window.jQuery, window._ );
