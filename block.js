@@ -19,11 +19,6 @@
 		}, gifImage );
 	}
 
-	var resultsDiv = wp.element.createElement( 'div', {
-		className: 'giphy__results',
-		key: 'results-wrapper'
-	}, wp.element.createElement( 'ul', { key: 'results' }, results ) );
-
 
 	wp.blocks.registerBlockType( 'giphy/giphy', {
 		title: __( 'Giphy', 'giphy-block' ),
@@ -41,6 +36,7 @@
 		 */
 		edit: function edit( props ) {
 			var attributes = props.attributes;
+			var results = [];
 
 			var fetchGifs = _.debounce( function fetchGifs( search ) {
 				if ( attributes.fetching ) {
@@ -88,7 +84,11 @@
 									} );
 								}
 							}
-						} )
+						} ),
+						wp.element.createElement( 'div', {
+							className: 'giphy__results',
+							key: 'results-wrapper'
+						}, wp.element.createElement( 'ul', { key: 'results' }, results ) )
 					]
 				} );
 			}
